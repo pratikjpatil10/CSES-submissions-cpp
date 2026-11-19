@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define mod 1000000007
-
+ 
 int solveRec(int x, int index, int &n, vector<int> &arr, vector<vector<int>> &dp)
 {
     if (x == 0)
@@ -12,19 +12,19 @@ int solveRec(int x, int index, int &n, vector<int> &arr, vector<vector<int>> &dp
     {
         return 0;
     }
-
+ 
     if (dp[x][index] != -1)
         return dp[x][index];
-
+ 
     int ans = 0;
     if (x - arr[index] >= 0)
     {
         ans = (ans % mod + solveRec(x - arr[index], index, n, arr, dp) % mod) % mod;
+        ans = (ans % mod + solveRec(x, index + 1, n, arr, dp)) % mod;
     }
-    ans = (ans % mod + solveRec(x, index + 1, n, arr, dp)) % mod;
     return dp[x][index] = ans;
 }
-
+ 
 int main()
 {
     int n, x;
